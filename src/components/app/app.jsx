@@ -30,7 +30,7 @@ const App = () => {
   }), [])
 
   useEffect(() => {
-    getIngredients(url)
+    getIngredients(`${url}/ingredients`)
       .then((ingredients) => setIngredients(ingredients))
       .catch((err) => console.log(err))
   }, []);
@@ -42,8 +42,13 @@ const App = () => {
         <BurgerIngredients ingredients={ingredients} onSelect={handleSelectIngredient} />
         <BurgerConstructor ingredients={ingredients} onSubmit={handleOpenOrderDetailsPopup} />
       </main>
-      <OrderDetails onClose={handleCloseOrderDetailsPopup} isShow={orderDetailsPopup} />
-      <IngredientDetails onClose={handleCloseIngredientDetailsPopup} {...ingredientDetailsPopup} />
+      {orderDetailsPopup && <OrderDetails onClose={handleCloseOrderDetailsPopup} isShow={orderDetailsPopup} />}
+      {ingredientDetailsPopup.isShow && (
+        <IngredientDetails
+          onClose={handleCloseIngredientDetailsPopup}
+          ingredient={ingredientDetailsPopup.ingredient}
+        />
+      )}
     </div>
   );
 };

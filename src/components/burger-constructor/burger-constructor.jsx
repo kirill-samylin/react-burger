@@ -5,23 +5,22 @@ import styles from './burger-constructor.module.css';
 import cn from "classnames";
 
 const BurgerConstructor = ({ingredients, onSubmit}) => {
-  const firstItem = ingredients.length ? ingredients[0] : null;
-  const lastItem = ingredients.length > 1 ? ingredients[ingredients.length - 1] : null;
+  const bunItem = ingredients.length ? ingredients[0] : null;
   return (
     <section className="pr-4 pr-4 mt-25">
-      {firstItem && (
+      {bunItem && (
         <div className="ml-8">
           <ConstructorElement
             type="top"
-            text={firstItem.name + ` (верх)`}
-            price={firstItem.price}
+            text={bunItem.name + ` (верх)`}
+            price={bunItem.price}
             isLocked={true}
-            thumbnail={firstItem.image}
+            thumbnail={bunItem.image}
           />
         </div>
       )}
       <ul className={cn('custom-scroll', styles.components)}>
-        {ingredients && ingredients.map(({name, _id, image, price}, index) => {
+        {ingredients && ingredients.filter(({type}) => type !== 'bun').map(({name, _id, image, price}, index) => {
           const isFirst = index === 0;
           const isLast = index === ingredients.length-1;
           if (isFirst || isLast) return null;
@@ -39,14 +38,14 @@ const BurgerConstructor = ({ingredients, onSubmit}) => {
           )
         })}
       </ul>
-      {lastItem && (
+      {bunItem && (
         <div className="ml-8">
           <ConstructorElement
             type="bottom"
-            text={lastItem.name + ` (низ)`}
-            price={lastItem.price}
+            text={bunItem.name + ` (низ)`}
+            price={bunItem.price}
             isLocked={true}
-            thumbnail={lastItem.image}
+            thumbnail={bunItem.image}
           />
         </div>
       )}
