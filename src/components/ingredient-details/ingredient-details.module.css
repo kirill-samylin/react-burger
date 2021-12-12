@@ -1,0 +1,17 @@
+.modal {
+  width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+.image {
+  width: 100%;
+}
+.nutritional {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  list-style: none;
+}
+.nutritionalItem {
+  text-align: center;
+}
