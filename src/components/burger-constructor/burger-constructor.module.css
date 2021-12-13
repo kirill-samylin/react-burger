@@ -1,0 +1,30 @@
+.components {
+  display: grid;
+  gap: 16px;
+  height: 464px;
+  overflow: auto;
+  list-style: none;
+  padding: 0;
+}
+.component {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 24px auto;
+  align-items: center;
+}
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+.constructor__footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.sum {
+  display: flex;
+  align-items: center;
+}
