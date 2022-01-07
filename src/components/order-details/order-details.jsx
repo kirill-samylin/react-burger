@@ -3,12 +3,14 @@ import Modal from "../modal/modal";
 import styles from './order-details.module.css';
 import doneImg from '../../images/done.svg';
 import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 
 const OrderDetails = memo(({onClose}) => {
+  const {orderNumber = '034536'} = useSelector(state => state.ingredient.orderDetails);
   return (
     <Modal onClose={onClose}>
       <div className={styles.modal}>
-        <p className="text text_type_digits-large">034536</p>
+        <p className="text text_type_digits-large">{orderNumber}</p>
         <p className="text text_type_main-medium mt-8">
           идентификатор заказа
         </p>

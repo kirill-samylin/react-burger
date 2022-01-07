@@ -1,0 +1,13 @@
+.ingredient {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 24px auto;
+  align-items: center;
+}
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
