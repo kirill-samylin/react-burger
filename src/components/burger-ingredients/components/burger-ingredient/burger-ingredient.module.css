@@ -26,15 +26,3 @@
   object-fit: contain;
   object-position: center;
 }
-.count {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--interface-accent);
-}

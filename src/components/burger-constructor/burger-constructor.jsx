@@ -11,9 +11,9 @@ import {Types} from "constants/types";
 
 const BurgerConstructor = ({onSubmit}) => {
   const dispatch = useDispatch();
-  const ingredients = useSelector(state => state.ingredient.burgerIngredient);
+  const {burgerIngredient: ingredients, orderDetailsRequest} = useSelector(state => state.ingredient);
   const bunItem = ingredients.length && ingredients[0].type === 'bun' ? ingredients[0] : null;
-  const sum = ingredients.reduce((sum, {price}) => price+sum, 0);
+  const sum = ingredients.reduce((sum, {price, type}) => sum+(price * (type === 'bun' ? 2 : 1)), 0);
 
   const [, dropTarget] = useDrop({
     accept: Types.INGREDIENT,
@@ -24,6 +24,9 @@ const BurgerConstructor = ({onSubmit}) => {
       });
     }
   });
+  const handleSubmit = useCallback(() => {
+    onSubmit(ingredients.map((item) => item._id));
+  }, [ingredients, onSubmit]);
 
   const handleDelete = useCallback((id) => {
     dispatch({
@@ -93,8 +96,8 @@ const BurgerConstructor = ({onSubmit}) => {
           <p className="text text_type_digits-medium mr-2">{sum}</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large" onClick={onSubmit}>
-          Оформить заказ
+        <Button type="primary" size="large" onClick={handleSubmit} disabled={orderDetailsRequest || !ingredients.find(({type}) => type === 'bun')}>
+          {orderDetailsRequest ? 'Загрузка...' : 'Оформить заказ'}
         </Button>
       </div>
     </section>

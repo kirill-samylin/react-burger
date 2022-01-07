@@ -1,11 +1,10 @@
 import {
   ADD_INGREDIENT,
-  CLEAR_INGREDIENT_DETAILS_MODAL, DELETE_INGREDIENT,
+  CLEAR_INGREDIENT_DETAILS_MODAL, CREATE_ORDER_FAILED, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, DELETE_INGREDIENT,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
-  GET_INGREDIENTS_SUCCESS, MOVE_INGREDIENT,
+  GET_INGREDIENTS_SUCCESS, HIDE_DETAILS_ORDER_MODAL, MOVE_INGREDIENT,
   SET_INGREDIENT_DETAILS_MODAL,
-  SET_ORDER_DETAILS_NUMBER,
   TAB_SWITCH_INGREDIENTS,
 } from "../actions/ingredient";
 
@@ -15,9 +14,12 @@ const initialState = {
   ingredientsFailed: false,
   burgerIngredient: [],
   orderDetails: {},
+  orderDetailsRequest: false,
+  orderDetailsFailed: false,
   ingredientDetails: {},
   isShowIngredientDetails: false,
   currentTabIngredients: 'bun',
+  isShowOrderDetails: false,
 };
 
 export const ingredientReducer = (state = initialState, action) => {
@@ -46,15 +48,6 @@ export const ingredientReducer = (state = initialState, action) => {
         ...state,
         isShowIngredientDetails: false,
         ingredientDetails: {},
-      }
-    }
-    case SET_ORDER_DETAILS_NUMBER: {
-      return {
-        ...state,
-        orderDetails: {
-          ...state.orderDetails,
-          number: action.orderNumber,
-        },
       }
     }
     case TAB_SWITCH_INGREDIENTS: {
@@ -97,6 +90,36 @@ export const ingredientReducer = (state = initialState, action) => {
       return {
         ...state,
         burgerIngredient: ingredients,
+      }
+    }
+    case CREATE_ORDER_REQUEST: {
+      return {
+        ...state,
+        orderDetailsRequest: true,
+      }
+    }
+    case CREATE_ORDER_SUCCESS: {
+      return {
+        ...state,
+        orderDetailsRequest: false,
+        orderDetailsFailed: false,
+        burgerIngredient: [],
+        orderDetails: action.orderDetails,
+        isShowOrderDetails: true,
+      }
+    }
+    case CREATE_ORDER_FAILED: {
+      return {
+        ...state,
+        orderDetailsRequest: false,
+        orderDetailsFailed: true,
+      }
+    }
+    case HIDE_DETAILS_ORDER_MODAL: {
+      return {
+        ...state,
+        isShowOrderDetails: false,
+        orderDetails: {},
       }
     }
     default: {

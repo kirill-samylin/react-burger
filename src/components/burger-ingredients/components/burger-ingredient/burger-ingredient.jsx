@@ -1,6 +1,6 @@
 import cn from "classnames";
 import styles from "./burger-ingredient.module.css";
-import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import {burgerIngredientType} from "../../../../types/burger-ingredient";
 import {useDrag} from "react-dnd";
@@ -9,7 +9,8 @@ import {Types} from "constants/types";
 
 export const BurgerIngredient = ({ingredient, onSelect}) => {
   const ingredients = useSelector(state => state.ingredient.burgerIngredient);
-  const {_id, image, price, name} = ingredient;
+  const {_id, image, price, name, type} = ingredient;
+  const isBun = type === 'bun';
   const count = ingredients.filter((item) => item._id === _id).length || null;
   const [{ opacity }, ref] = useDrag({
     type: Types.INGREDIENT,
@@ -20,8 +21,8 @@ export const BurgerIngredient = ({ingredient, onSelect}) => {
   });
 
   return (
-    <li key={_id} className={styles.card} onClick={() => onSelect(ingredient)} ref={ref} style={{ opacity }}>
-      {count && <p className={cn(styles.count, "text text_type_digits-default")}>{count}</p>}
+    <li className={styles.card} onClick={() => onSelect(ingredient)} ref={ref} style={{ opacity }}>
+      {count && <Counter count={isBun ? count + 1 : count} size="default" />}
       <img className={cn('pl-4 pr-4', styles.image)} src={image} alt={name} />
       <div className={styles.price}>
         <p className="text text_type_digits-default mr-2">{price}</p>
