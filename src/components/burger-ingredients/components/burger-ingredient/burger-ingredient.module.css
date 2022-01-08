@@ -1,17 +1,3 @@
-.tabs {
-  display: flex;
-}
-.ingredients__list {
-  height: 716px;
-  overflow: auto;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.ingredients__list::-webkit-scrollbar-track {
-  margin: 40px 0;
-}
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, 272px);
@@ -21,6 +7,7 @@
   list-style: none;
 }
 .card {
+  position: relative;
   display: grid;
   grid-template-rows: 120px 24px auto;
   gap: 4px;

@@ -1,53 +1,57 @@
-import {memo, useState} from "react";
+import {useCallback} from "react";
 import styles from './burger-ingredients.module.css';
-import {CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ingredientTypes} from "./burger-ingredients.constants";
 import cn from "classnames";
-import PropTypes from "prop-types";
 
-import {burgerIngredientType} from "../../types/burger-ingredient";
+import {useDispatch, useSelector} from "react-redux";
+import {SET_INGREDIENT_DETAILS_MODAL, TAB_SWITCH_INGREDIENTS} from "../../services/actions/ingredient";
+import {useScrollTabs} from "../../hooks/useScrollTabs";
+import {BurgerIngredient} from "./components/burger-ingredient";
 
-const BurgerIngredients = memo(({ingredients, onSelect}) => {
-  const [current, setCurrent] = useState('bun');
+const BurgerIngredients = () => {
+  const {currentTabIngredients, ingredients} = useSelector(state => state.ingredient);
+  const dispatch = useDispatch();
+  const handleSwitchTab = useCallback((value) => dispatch(
+    {
+      type: TAB_SWITCH_INGREDIENTS,
+      currentTabIngredients: value,
+    }
+  ), [dispatch]);
+
+  const [viewRef, onChangeTab] = useScrollTabs(handleSwitchTab);
+
+  const handleSelectIngredient = useCallback((ingredient) => dispatch({
+    type: SET_INGREDIENT_DETAILS_MODAL,
+    ingredient,
+  }), [dispatch]);
+
   return (
     <section>
       <h2 className="text text_type_main-large mt-10 mb-5">Собери бургер</h2>
       <nav className={styles.tabs}>
         {ingredientTypes.map(({name, value}) => (
-          <Tab key={value} value={value} active={current === value} onClick={setCurrent}>
+          <Tab key={value} value={value} active={currentTabIngredients === value} onClick={() => onChangeTab(value)}>
             {name}
           </Tab>
         ))}
       </nav>
-      <ul className={cn('custom-scroll', styles.ingredients__list)}>
+      <ul className={cn('custom-scroll', styles.ingredients__list)} ref={viewRef}>
         {ingredientTypes.map(({name, value}) => (
-          <li key={value} className={cn('mt-10', styles.ingredients__item)}>
+          <li data-type="tab-item" key={value} className={cn('pt-10', styles.ingredients__item)} id={value}>
             <p className="text text_type_main-medium mb-6">{name}</p>
             <ul className={cn('pl-4 pr-2', styles.cards)}>
-              {ingredients && ingredients.filter((ingredient) => value === ingredient.type).map((ingredient) => {
-                const {_id, image, price, name} = ingredient;
-                return (
-                  <li key={_id} className={styles.card} onClick={() => onSelect(ingredient)}>
-                    <img className={cn('pl-4 pr-4', styles.image)} src={image} alt={name} />
-                    <div className={styles.price}>
-                      <p className="text text_type_digits-default mr-2">{price}</p>
-                      <CurrencyIcon type="primary" />
-                    </div>
-                    <p className="text text_type_main-default mt-1">{name}</p>
-                  </li>
-               )
-              })}
+              {ingredients && ingredients
+                .filter((ingredient) => value === ingredient.type)
+                .map((ingredient) => (
+                  <BurgerIngredient key={ingredient._id} ingredient={ingredient} onSelect={handleSelectIngredient} />
+                ))}
             </ul>
           </li>
         ))}
       </ul>
     </section>
   );
-});
+};
 
 export default BurgerIngredients;
-
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(burgerIngredientType.isRequired).isRequired,
-  onSelect: PropTypes.func,
-};

@@ -1,53 +1,59 @@
 import styles from './app.module.css';
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import {useCallback, useEffect, useState} from "react";
-import {getIngredients} from "../../utils/api";
-import {url} from "../../constants/api";
+import {useCallback, useEffect} from "react";
+
+import {
+  CLEAR_INGREDIENT_DETAILS_MODAL,
+  HIDE_DETAILS_ORDER_MODAL,
+  createOrder,
+  getIngredients,
+} from "services/actions/ingredient";
+
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import OrderDetails from "../order-details/order-details";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import {useDispatch, useSelector} from "react-redux";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import {DndProvider} from "react-dnd";
+import Modal from "../modal/modal";
 
 const App = () => {
-  const [ingredients, setIngredients] = useState([]);
-  const [orderDetailsPopup, setOrderDetailsPopup] = useState(false);
-  const [ingredientDetailsPopup, setIngredientDetailsPopup] = useState({
-    isShow: false,
-    ingredient: {},
-  });
+  const dispatch = useDispatch();
+  const {isShowIngredientDetails, isShowOrderDetails} = useSelector(state => state.ingredient);
 
-  const handleCloseOrderDetailsPopup = useCallback(() => setOrderDetailsPopup(false), []);
-  const handleOpenOrderDetailsPopup = useCallback(() => setOrderDetailsPopup(true), []);
+  const handleCloseOrderDetailsPopup = useCallback(() => dispatch({
+    type: HIDE_DETAILS_ORDER_MODAL,
+  }), [dispatch]);
 
-  const handleSelectIngredient = useCallback((ingredient) => setIngredientDetailsPopup({
-    isShow: true,
-    ingredient,
-  }), []);
+  const handleOpenOrderDetailsPopup = useCallback((ids) => {
+    dispatch(createOrder(ids));
+  }, [dispatch]);
 
-  const handleCloseIngredientDetailsPopup = useCallback(() => setIngredientDetailsPopup({
-    isShow: false,
-    ingredient: {},
-  }), [])
+  const handleCloseIngredientDetailsPopup = useCallback(() => dispatch({
+    type: CLEAR_INGREDIENT_DETAILS_MODAL,
+  }), [dispatch]);
 
-  useEffect(() => {
-    getIngredients(`${url}/ingredients`)
-      .then((ingredients) => setIngredients(ingredients))
-      .catch((err) => console.log(err))
-  }, []);
+  useEffect(() => dispatch(getIngredients()), [dispatch]);
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients ingredients={ingredients} onSelect={handleSelectIngredient} />
-        <BurgerConstructor ingredients={ingredients} onSubmit={handleOpenOrderDetailsPopup} />
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor onSubmit={handleOpenOrderDetailsPopup} />
+        </DndProvider>
       </main>
-      {orderDetailsPopup && <OrderDetails onClose={handleCloseOrderDetailsPopup} isShow={orderDetailsPopup} />}
-      {ingredientDetailsPopup.isShow && (
-        <IngredientDetails
-          onClose={handleCloseIngredientDetailsPopup}
-          ingredient={ingredientDetailsPopup.ingredient}
-        />
+      {isShowOrderDetails && (
+        <Modal onClose={handleCloseOrderDetailsPopup}>
+          <OrderDetails />
+        </Modal>
+      )}
+      {isShowIngredientDetails && (
+        <Modal onClose={handleCloseIngredientDetailsPopup} title="Детали ингредиента">
+          <IngredientDetails />
+        </Modal>
       )}
     </div>
   );
