@@ -1,0 +1,17 @@
+.profile {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+.form {
+  display: grid;
+  gap: 24px;
+  margin-top: 120px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}

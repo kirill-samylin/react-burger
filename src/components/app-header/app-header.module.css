@@ -11,15 +11,14 @@
 .menu {
   display: flex;
 }
-.button {
+.link {
   display: flex;
   background: none;
   padding: 16px 20px;
-  border: none;
   border-radius: 40px;
   cursor: pointer;
   box-sizing: border-box;
-
+  text-decoration: none;
 }
 .active {
   color: var(--text-primary-light);

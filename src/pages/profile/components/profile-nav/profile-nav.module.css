@@ -1,0 +1,29 @@
+.nav {
+  margin-top: 120px;
+}
+
+.list {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  width: 320px;
+  height: 64px;
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.active {
+  color: white;
+}
+
+.paragraph {
+  width: 320px;
+}
