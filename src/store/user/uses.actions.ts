@@ -30,7 +30,7 @@ export const loginUser = (data: LoginBody) => {
         if (!success) {
           return Promise.reject('error');
         }
-        setCookie('accessToken', accessToken, {expires: 1200});
+        setCookie('accessToken', accessToken, {expires: 600});
         localStorage.setItem('refreshToken', refreshToken);
         dispatch(userActions.login({user}));
       })

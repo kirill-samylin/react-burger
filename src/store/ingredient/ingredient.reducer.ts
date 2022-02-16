@@ -9,7 +9,6 @@ const initialState: IIngredientState = {
   orderDetails: {},
   orderDetailsRequest: false,
   orderDetailsFailed: false,
-  ingredientDetails: {},
   isShowIngredientDetails: false,
   currentTabIngredients: 'bun',
   isShowOrderDetails: false,
@@ -28,20 +27,6 @@ export const ingredientReducer = (state: IIngredientState = initialState, action
     }
     case ActionIngredient.GET_INGREDIENTS_FAILED: {
       return {...state, ingredientsFailed: true, ingredientsRequest: false};
-    }
-    case ActionIngredient.SET_INGREDIENT_DETAILS_MODAL: {
-      return {
-        ...state,
-        isShowIngredientDetails: true,
-        ingredientDetails: action.payload.ingredient,
-      }
-    }
-    case ActionIngredient.CLEAR_INGREDIENT_DETAILS_MODAL: {
-      return {
-        ...state,
-        isShowIngredientDetails: false,
-        ingredientDetails: {},
-      }
     }
     case ActionIngredient.TAB_SWITCH_INGREDIENTS: {
       return {

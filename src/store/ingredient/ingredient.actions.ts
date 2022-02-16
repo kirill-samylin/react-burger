@@ -11,8 +11,6 @@ export enum ActionIngredient {
   CREATE_ORDER_REQUEST = 'CREATE_ORDER_REQUEST',
   CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS',
   CREATE_ORDER_FAILED = 'CREATE_ORDER_FAILED',
-  SET_INGREDIENT_DETAILS_MODAL = 'SET_INGREDIENT_DETAILS',
-  CLEAR_INGREDIENT_DETAILS_MODAL = 'CLEAR_INGREDIENT_DETAILS',
   HIDE_DETAILS_ORDER_MODAL = 'HIDE_DETAILS_ORDER_MODAL',
   TAB_SWITCH_INGREDIENTS = 'TAB_SWITCH_INGREDIENTS',
   ADD_INGREDIENT = 'ADD_INGREDIENT',
@@ -40,13 +38,6 @@ export const ingredientActions = {
   }),
   createOrderFailed: () => ({
     type: ActionIngredient.CREATE_ORDER_FAILED,
-  }),
-  setIngredientDetailsModal: (payload: any) => ({
-    type: ActionIngredient.SET_INGREDIENT_DETAILS_MODAL,
-    payload,
-  }),
-  cleanIngredientDetailsModal: () => ({
-    type: ActionIngredient.CLEAR_INGREDIENT_DETAILS_MODAL
   }),
   hideDetailsOrderModal: () => ({
     type: ActionIngredient.HIDE_DETAILS_ORDER_MODAL

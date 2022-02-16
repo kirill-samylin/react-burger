@@ -1,30 +1,34 @@
-import Main from "pages/main/main";
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import SingIn from "pages/sing-in/sing-in";
 import Registration from "pages/registration/registration";
 import ForgotPassword from "pages/forgot-password/forgot-password";
 import ResetPassword from "pages/reset-password/reset-password";
 import Profile from "pages/profile/profile";
-import {useSelector} from "react-redux";
-import {isAppInitializedSelector} from "store/user/user.selectors";
-import {FC} from "react";
+import NotFount from "pages/not-fount/not-fount";
+import {FC, useEffect} from "react";
 import {PrivateRoute} from "components/private-route/private-route";
-import {PublicRoute} from "../public-route/public-route";
+import {PublicRoute} from "components/public-route/public-route";
+import {getIngredients} from "store/ingredient/ingredient.actions";
+import {useDispatch} from "react-redux";
+import Home from "pages/home/home";
+import {ERoutePath} from "constants/routes";
 
 const App: FC = () => {
-  const isAppInitialized = useSelector(isAppInitializedSelector);
-  if (!isAppInitialized) {
-    return <div>Loading</div>;
-  }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
+
   return (
     <Router>
       <Switch>
-        <PublicRoute component={SingIn} path="/login" redirectTo="/" />
-        <PublicRoute component={Registration} path="/register" redirectTo="/" />
-        <PublicRoute component={ForgotPassword} path="/forgot-password" redirectTo="/" />
-        <PublicRoute component={ResetPassword} path="/reset-password" redirectTo="/" />
-        <PrivateRoute component={Profile} path="/profile" redirectTo="/login" />
-        <PrivateRoute component={Main} path="/" redirectTo="/login" />
+        <PublicRoute component={SingIn} path={ERoutePath.LOGIN} redirectTo={ERoutePath.HOME} />
+        <PublicRoute component={Registration} path={ERoutePath.REGISTER} redirectTo={ERoutePath.HOME} />
+        <PublicRoute component={ForgotPassword} path="/forgot-password" redirectTo={ERoutePath.HOME} />
+        <PublicRoute component={ResetPassword} path="/reset-password" redirectTo={ERoutePath.HOME} />
+        <PrivateRoute component={Profile} path={[ERoutePath.PROFILE, ERoutePath.PROFILE_ORDERS]} redirectTo={ERoutePath.LOGIN} exact />
+        <Route component={Home} path={[ERoutePath.HOME, ERoutePath.INGREDIENT_ID]} exact />
+        <Route component={NotFount} />
       </Switch>
     </Router>
   );

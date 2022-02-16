@@ -4,6 +4,7 @@ import styles from "./profile-nav.module.css";
 import {useCallback} from "react";
 import {logout} from "../../../../store/user/uses.actions";
 import {useDispatch} from "react-redux";
+import {ERoutePath} from "../../../../constants/routes";
 
 const ProfileNav = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const ProfileNav = () => {
           <NavLink
             activeClassName={styles.active}
             className={cn("text text_type_main-medium text_color_inactive", styles.link)}
-            to="/profile"
+            to={ERoutePath.PROFILE}
             exact
           >
             Профиль
@@ -28,7 +29,7 @@ const ProfileNav = () => {
           <NavLink
             activeClassName={styles.active}
             className={cn("text text_type_main-medium text_color_inactive", styles.link)}
-            to="/profile/orders"
+            to={ERoutePath.PROFILE_ORDERS}
             exact
           >
             История заказов

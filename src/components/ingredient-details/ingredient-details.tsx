@@ -2,12 +2,24 @@ import styles from './ingredient-details.module.css';
 import cn from "classnames";
 import {useSelector} from "react-redux";
 import {FC} from "react";
-import {ingredientDetailsSelector} from "../../store/ingredient/ingredient.selectors";
+import {getIngredientSelector} from "store/ingredient/ingredient.selectors";
+import {useParams} from "react-router";
+import {useHistory} from "react-router-dom";
+import {ERoutePath} from "constants/routes";
+import {IngredientDetailsProps} from "./ingredient-details.types";
 
-const IngredientDetails: FC = () => {
-  const {image, name, fat, calories, carbohydrates, proteins} = useSelector(ingredientDetailsSelector) || {};
+const IngredientDetails: FC<IngredientDetailsProps> = ({className, isTitle = false}) => {
+  const history = useHistory();
+  const { id } = useParams<{id : string}>();
+  const {image, name, fat, calories, carbohydrates, proteins} = useSelector(getIngredientSelector(id)) || {};
+
+  if (!name) {
+    history.push(ERoutePath.NOT_FOUNT);
+  }
+
   return (
-    <div className={styles.modal}>
+    <div className={cn(className, styles.modal)}>
+      {isTitle && <p className="text text_type_main-large">Детали ингредиента</p>}
       <img className={cn('pl-5 pr-5', styles.image)} src={image} alt={name} />
       <p className="text text_type_main-medium mt-4 mb-8">
         {name}

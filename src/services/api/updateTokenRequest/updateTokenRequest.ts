@@ -1,4 +1,4 @@
-import {url} from "../../../constants/api";
+import {url} from "constants/api";
 import {getJSON} from "services/api/utils/getJSON";
 
 export interface UpdateTokenResponse {

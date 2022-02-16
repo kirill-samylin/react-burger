@@ -9,8 +9,10 @@ import {ingredientActions} from "store/ingredient/ingredient.actions";
 import {useScrollTabs} from "hooks/useScrollTabs";
 import {BurgerIngredient} from "./components/burger-ingredient";
 import {ingredientStateSelector} from "../../store/ingredient/ingredient.selectors";
+import {useHistory} from "react-router-dom";
 
 const BurgerIngredients = () => {
+  const history = useHistory();
   const {currentTabIngredients: currentTab, ingredients, burgerIngredient} = useSelector(ingredientStateSelector);
   const dispatch = useDispatch();
   const handleSwitchTab = useCallback((currentTabIngredients) =>
@@ -20,10 +22,6 @@ const BurgerIngredients = () => {
   ), [dispatch]);
 
   const [viewRef, onChangeTab] = useScrollTabs(handleSwitchTab);
-
-  const handleSelectIngredient = useCallback((ingredient) => dispatch(ingredientActions.setIngredientDetailsModal({
-    ingredient,
-  })), [dispatch]);
 
   return (
     <section>
@@ -47,7 +45,10 @@ const BurgerIngredients = () => {
                     key={ingredient._id}
                     ingredients={burgerIngredient}
                     ingredient={ingredient}
-                    onSelect={handleSelectIngredient}
+                    onSelect={() => history.push({
+                      pathname: `/ingredient/${ingredient._id}`,
+                      state: [{ path: `/ingredient/${ingredient._id}`, url: `/ingredient/${ingredient._id}`, title: ingredient.name}]
+                    })}
                   />
                 ))}
             </ul>

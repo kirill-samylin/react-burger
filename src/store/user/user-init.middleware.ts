@@ -16,7 +16,7 @@ export const userInitMiddleware = () => {
         const {success, accessToken: token} = await updateTokenRequest({token: refreshToken});
         if (!success) throw new Error('NOT');
         accessToken = token;
-        setCookie('accessToken', token, {expires: 1200});
+        setCookie('accessToken', token, {expires: 600});
       }
       const {success: resp, user} = await getUserRequest(accessToken);
       if (!resp) throw new Error('NOT');

@@ -1,16 +1,33 @@
 import {useSelector} from "react-redux";
-import {FC, useCallback, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import cn from "classnames";
 import styles from "../../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {userSelector} from "store/user/user.selectors";
 import {TUser} from "store/user/user.types";
+import {useHistory, useLocation, useRouteMatch} from "react-router-dom";
+import {LocationState} from "../../../../types/types";
+import {isContainRoute} from "../../../../services/breadcrumbs";
 
 const ProfileEdit: FC = () => {
   const {name = '', email = ''} = useSelector(userSelector) || {};
   const [data, setData] = useState<TUser>({name, email, password: 'ffff'});
   const [isEdit, setIsEdit] = useState<boolean>(false);
+
+  const history = useHistory();
+  const { state } = useLocation<LocationState>();
+  const { url, path } = useRouteMatch();
+
+  useEffect(
+    () => {
+      if (state && !isContainRoute(state, url)) {
+        history.replace({ state: [...state, { path, url, title: 'Профиль' }] });
+      }
+    },
+    [path, url, state, history]
+  );
+
   const handleChange = useCallback(({target}) => {
     const {name, value} = target;
     setData({

@@ -1,21 +1,35 @@
-import {useState, useCallback} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useState, useCallback, useEffect} from 'react';
+import {Link, useHistory, useLocation, useRouteMatch} from 'react-router-dom';
 import cn from 'classnames';
 
 import {Input, PasswordInput, Button} from "@ya.praktikum/react-developer-burger-ui-components";
 
-import AppHeader from "components/app-header/app-header";
+import Layout from "layout/layout/layout";
 import styles from './registration.module.css';
 import FormRegistration from "components/form-registation/form-registration";
 import {registerRequest} from "services/api";
+import {LocationState} from "types/types";
+import {isContainRoute} from "services/breadcrumbs";
+import {ERoutePath} from "constants/routes";
 
 const Registration = () => {
-  const history = useHistory();
   const [data, setData] = useState({
     name: '',
     password: '',
     email: '',
   });
+  const history = useHistory();
+  const { state } = useLocation<LocationState>();
+  const { url, path } = useRouteMatch();
+  useEffect(
+    () => {
+      if (state && !isContainRoute(state, url)) {
+        history.replace({ state: [...state, { path, url, title: 'Регистрация' }] });
+      }
+    },
+    [path, url, state, history]
+  );
+
   const handleChange = useCallback((e) => {
     const {name, value} = e.target;
     setData({
@@ -27,21 +41,12 @@ const Registration = () => {
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
     registerRequest(data)
-      .then(() => history.push('/login'))
+      .then(() => history.push(ERoutePath.LOGIN))
       .catch((err) => console.log(err));
   }, [data, history]);
-  // {
-  //   "success": true,
-  //   "user": {
-  //   "email": "kirill23sm@ya.ru",
-  //     "name": "QIWI CARD"
-  // },
-  //   "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZjRmMTdlNmQ3Y2Q4MDAxYjJkMmQ5OCIsImlhdCI6MTY0MzQ0MjU1OCwiZXhwIjoxNjQzNDQzNzU4fQ.wTeIKdtV9i8m6jJdMKTrB7J9By4gg2uh2fLPdwx0Qq4",
-  //   "refreshToken": "c16f9c79b78c5995d072908d76f35a0ca76006f3883165c0fd187b49892db96056d3fa0ec30347e1"
-  // }
+
   return (
-    <>
-      <AppHeader />
+    <Layout>
       <FormRegistration onSubmit={handleSubmit}>
         <p className="text text_type_main-medium">
           Регистрация
@@ -68,10 +73,10 @@ const Registration = () => {
       <div className={cn(styles.footer, "mt-20")}>
         <div className={styles.paragraph}>
           <p className="text text_type_main-default text_color_inactive mr-1">Уже зарегистрированы?</p>
-          <Link className={cn("text text_type_main-default", styles.link)} to="/login">Войти</Link>
+          <Link className={cn("text text_type_main-default", styles.link)} to={ERoutePath.LOGIN}>Войти</Link>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

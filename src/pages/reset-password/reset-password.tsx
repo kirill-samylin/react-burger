@@ -1,24 +1,34 @@
 import {ChangeEvent, useCallback, useState} from "react";
-import AppHeader from "components/app-header/app-header";
 import FormRegistration from "components/form-registation/form-registration";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import styles from "../registration/registration.module.css";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
+import Layout from "layout/layout/layout";
+import {LocationState} from "types/types";
+import {ERoutePath} from "../../constants/routes";
 
 const ResetPassword = () => {
-  const history = useHistory();
   const [data, setData] = useState({
     password: '',
     code: '',
   });
 
+  const history = useHistory();
+  const { state } = useLocation<LocationState>();
+
+  if (!state?.length || state[state.length - 1].path !== ERoutePath.FORGOT_PASSWORD) {
+    history.push({
+      pathname: ERoutePath.LOGIN,
+      state
+    });
+  }
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    history.push('/login');
-    console.log(data)
+    history.push(ERoutePath.LOGIN);
   }, [history, data]);
 
+  ///reset-password
   const handleChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = target;
     setData({
@@ -28,8 +38,7 @@ const ResetPassword = () => {
   }, [data]);
 
   return (
-    <>
-      <AppHeader />
+    <Layout>
       <FormRegistration onSubmit={handleSubmit}>
         <p className="text text_type_main-medium">Восстановление пароля</p>
         <Input
@@ -52,10 +61,10 @@ const ResetPassword = () => {
       <div className={cn(styles.footer, "mt-20")}>
         <div className={styles.paragraph}>
           <p className="text text_type_main-default text_color_inactive mr-1">Вспомнили пароль?</p>
-          <Link className={cn("text text_type_main-default", styles.link)} to="/login">Войти</Link>
+          <Link className={cn("text text_type_main-default", styles.link)} to={ERoutePath.LOGIN}>Войти</Link>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 
