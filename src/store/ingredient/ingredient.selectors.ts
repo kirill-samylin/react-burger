@@ -11,3 +11,5 @@ export const getIngredientSelector = (id: string) => (state: AppState): IIngredi
 export const orderDetailsSelector = (state: AppState) => state.ingredient.orderDetails;
 
 export const ingredientStateSelector = (state: AppState) => state.ingredient;
+
+export const isIngredientLoaded = () => (state: AppState): boolean => !state.ingredient.ingredientsRequest

@@ -8,6 +8,9 @@ import {FC, useCallback} from "react";
 import {BurgerConstructorIngredient} from "./components";
 import {Types} from "constants/types";
 import {ingredientStateSelector} from "store/ingredient/ingredient.selectors";
+import { userSelector } from "store/user/user.selectors";
+import { useHistory } from "react-router-dom";
+import { ERoutePath } from "constants/routes";
 
 interface BurgerConstructorProps {
   onSubmit: (ingredients: string[]) => void;
@@ -15,9 +18,12 @@ interface BurgerConstructorProps {
 
 const BurgerConstructor: FC<BurgerConstructorProps> = ({onSubmit}) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const {burgerIngredient: ingredients, orderDetailsRequest} = useSelector(ingredientStateSelector);
   const bunItem = ingredients.length && ingredients[0].type === 'bun' ? ingredients[0] : null;
   const sum = ingredients.reduce((sum, {price, type}) => sum+(price * (type === 'bun' ? 2 : 1)), 0);
+  const isAuth = useSelector(userSelector);
 
   const [, dropTarget] = useDrop({
     accept: Types.INGREDIENT,
@@ -28,8 +34,12 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({onSubmit}) => {
     }
   });
   const handleSubmit = useCallback(() => {
-    onSubmit(ingredients.map((item) => item._id));
-  }, [ingredients, onSubmit]);
+    if (!isAuth) {
+      history.push(ERoutePath.LOGIN);
+    } else {
+      onSubmit(ingredients.map((item) => item._id));
+    }
+  }, [ingredients, onSubmit, isAuth]);
 
   const handleDelete = useCallback((id) => {
     dispatch(ingredientActions.cleanIngredient({id}));

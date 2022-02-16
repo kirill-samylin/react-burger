@@ -1,3 +1,4 @@
+import {FC} from "react";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import SingIn from "pages/sing-in/sing-in";
 import Registration from "pages/registration/registration";
@@ -5,20 +6,12 @@ import ForgotPassword from "pages/forgot-password/forgot-password";
 import ResetPassword from "pages/reset-password/reset-password";
 import Profile from "pages/profile/profile";
 import NotFount from "pages/not-fount/not-fount";
-import {FC, useEffect} from "react";
 import {PrivateRoute} from "components/private-route/private-route";
 import {PublicRoute} from "components/public-route/public-route";
-import {getIngredients} from "store/ingredient/ingredient.actions";
-import {useDispatch} from "react-redux";
 import Home from "pages/home/home";
 import {ERoutePath} from "constants/routes";
 
 const App: FC = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-
   return (
     <Router>
       <Switch>
