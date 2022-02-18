@@ -3,7 +3,7 @@ import styles from './burger-constructor.module.css';
 import cn from "classnames";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
-import {ingredientActions} from "store/ingredient/ingredient.actions";
+import {createOrder, ingredientActions} from "store/ingredient/ingredient.actions";
 import {FC, useCallback} from "react";
 import {BurgerConstructorIngredient} from "./components";
 import {Types} from "constants/types";
@@ -12,14 +12,12 @@ import { userSelector } from "store/user/user.selectors";
 import { useHistory } from "react-router-dom";
 import { ERoutePath } from "constants/routes";
 
-interface BurgerConstructorProps {
-  onSubmit: (ingredients: string[]) => void;
-}
-
-const BurgerConstructor: FC<BurgerConstructorProps> = ({onSubmit}) => {
+const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const handleOpenOrderDetailsPopup = useCallback((ids) => {
+    dispatch(createOrder(ids));
+  }, [dispatch]);
   const {burgerIngredient: ingredients, orderDetailsRequest} = useSelector(ingredientStateSelector);
   const bunItem = ingredients.length && ingredients[0].type === 'bun' ? ingredients[0] : null;
   const sum = ingredients.reduce((sum, {price, type}) => sum+(price * (type === 'bun' ? 2 : 1)), 0);
@@ -37,9 +35,9 @@ const BurgerConstructor: FC<BurgerConstructorProps> = ({onSubmit}) => {
     if (!isAuth) {
       history.push(ERoutePath.LOGIN);
     } else {
-      onSubmit(ingredients.map((item) => item._id));
+      handleOpenOrderDetailsPopup(ingredients.map((item) => item._id));
     }
-  }, [ingredients, onSubmit, isAuth]);
+  }, [ingredients, handleOpenOrderDetailsPopup, isAuth, history]);
 
   const handleDelete = useCallback((id) => {
     dispatch(ingredientActions.cleanIngredient({id}));

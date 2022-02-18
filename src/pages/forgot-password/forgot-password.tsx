@@ -17,7 +17,6 @@ const ForgotPassword: FC = () => {
   const history = useHistory();
   const { state } = useLocation<LocationState>();
   const { url, path } = useRouteMatch();
-  console.log({state})
   useEffect(
     () => {
       if (state && !isContainRoute(state, url)) {

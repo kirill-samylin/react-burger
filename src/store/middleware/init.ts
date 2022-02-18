@@ -1,13 +1,22 @@
 import {Dispatch} from "redux";
-import {userActions} from "./uses.actions";
-import {getUserRequest, updateTokenRequest} from "services/api";
+import {getIngredientsRequest, getUserRequest, updateTokenRequest} from "services/api";
+import { ingredientActions } from "store/ingredient/ingredient.actions";
+import { userActions } from "store/user/uses.actions";
 import {getCookie, setCookie} from "utils/cookie/cookie";
 
-export const userInitMiddleware = () => {
+export const initMiddleware = () => {
   return async function(dispatch: Dispatch) {
     dispatch(userActions.initUser());
+    dispatch(ingredientActions.getIngredientsRequest());
     let accessToken: string = getCookie('accessToken') || '';
     const refreshToken = localStorage.getItem('refreshToken') || '';
+    await getIngredientsRequest()
+      .then(ingredients => {
+        dispatch(ingredientActions.getIngredientsSuccess({ingredients}));
+      })
+      .catch(() => {
+        dispatch(ingredientActions.getIngredientsFailed());
+      });
     try {
       if (!refreshToken) {
         return dispatch(userActions.logout());

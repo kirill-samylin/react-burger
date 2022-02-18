@@ -1,7 +1,4 @@
-import {
-  createOrderRequest,
-  getIngredientsRequest
-} from "services/api";
+import {createOrderRequest} from "services/api";
 import {Dispatch} from "redux";
 
 export enum ActionIngredient {
@@ -58,20 +55,6 @@ export const ingredientActions = {
     type: ActionIngredient.MOVE_INGREDIENT,
     payload
   }),
-}
-
-
-export function getIngredients() {
-  return function(dispatch: Dispatch) {
-    dispatch(ingredientActions.getIngredientsRequest());
-    getIngredientsRequest()
-      .then(ingredients => {
-        dispatch(ingredientActions.getIngredientsSuccess({ingredients}));
-      })
-      .catch(() => {
-        dispatch(ingredientActions.getIngredientsFailed());
-      });
-  };
 }
 
 export function createOrder(ids: string[]) {

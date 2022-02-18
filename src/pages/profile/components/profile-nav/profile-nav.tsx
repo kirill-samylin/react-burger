@@ -2,9 +2,9 @@ import {NavLink} from "react-router-dom";
 import cn from "classnames";
 import styles from "./profile-nav.module.css";
 import {useCallback} from "react";
-import {logout} from "../../../../store/user/uses.actions";
+import {logout} from "store/user/uses.actions";
 import {useDispatch} from "react-redux";
-import {ERoutePath} from "../../../../constants/routes";
+import {ERoutePath} from "constants/routes";
 
 const ProfileNav = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,15 @@ const ProfileNav = () => {
           <NavLink
             activeClassName={styles.active}
             className={cn("text text_type_main-medium text_color_inactive", styles.link)}
-            to={ERoutePath.PROFILE}
+            to={{
+              pathname: ERoutePath.PROFILE,
+              state: [{
+                isRedirect: true,
+                path: "/profile",
+                title: "Профиль",
+                url: "/profile",
+              }],
+            }}
             exact
           >
             Профиль
@@ -29,7 +37,15 @@ const ProfileNav = () => {
           <NavLink
             activeClassName={styles.active}
             className={cn("text text_type_main-medium text_color_inactive", styles.link)}
-            to={ERoutePath.PROFILE_ORDERS}
+            to={{
+              pathname: ERoutePath.PROFILE_ORDERS,
+              state: [{
+                isRedirect: true,
+                path: "/profile/orders",
+                title: "История заказов",
+                url: "/profile/orders",
+              }],
+            }}
             exact
           >
             История заказов

@@ -1,8 +1,7 @@
 import {LoginBody, loginRequest} from "../../services/api";
 import {Dispatch} from "redux";
-import {deleteCookie, getCookie, setCookie} from "../../utils/cookie/cookie";
+import {deleteCookie, setCookie} from "../../utils/cookie/cookie";
 import {logoutRequest} from "../../services/api/logoutRequest/logoutRequest";
-import {updateUserBody, updateUserRequest} from "../../services/api/updateUserRequest/updateUserRequest";
 
 export enum ActionUser {
   INIT_USER = 'INIT_USER',
@@ -52,14 +51,5 @@ export const logout = () => {
         dispatch(userActions.logout());
       })
       .catch(() => dispatch(userActions.logout()));
-  }
-}
-
-const updateUserInfo = (data: updateUserBody) => {
-  return function(dispatch: Dispatch) {
-    let accessToken: string = getCookie('accessToken') || '';
-    return updateUserRequest(data, accessToken)
-      .then(({user}) => dispatch(userActions.login({user})))
-      .catch((err) => console.log(err));
   }
 }

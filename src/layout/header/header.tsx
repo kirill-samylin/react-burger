@@ -30,7 +30,10 @@ const Header = () => {
           </NavLink>
         </nav>
         <Logo />
-        <NavLink activeClassName={styles.active} className={cn(styles.link, "text_color_inactive")} to={ERoutePath.PROFILE}>
+        <NavLink activeClassName={styles.active} className={cn(styles.link, "text_color_inactive")} to={{
+          pathname: ERoutePath.PROFILE,
+          state: [{path: '/profile', url: '/profile', title: 'Профиль', isRedirect: true}]
+        }}>
           <ProfileIcon type={path.startsWith(ERoutePath.PROFILE) ? "primary" : "secondary"} />
           <p className="text text_type_main-default pl-2">
             Личный кабинет

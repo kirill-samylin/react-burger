@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import {Input, PasswordInput, Button} from "@ya.praktikum/react-developer-burger-ui-components";
 
-import styles from './sing-in.module.css';
+import styles from './login.module.css';
 import FormRegistration from "components/form-registation/form-registration";
 import {useDispatch} from "react-redux";
 import {loginUser} from "store/user/uses.actions";
@@ -13,8 +13,11 @@ import {isContainRoute} from "services/breadcrumbs";
 import {LocationState} from "types/types";
 import {ERoutePath} from "constants/routes";
 
-const SingIn = () => {
+const Login = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { state } = useLocation<LocationState>();
+  const { url, path } = useRouteMatch();
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -33,13 +36,10 @@ const SingIn = () => {
     dispatch(loginUser(data))
   }, [data, dispatch]);
 
-  const history = useHistory();
-  const { state } = useLocation<LocationState>();
-  const { url, path } = useRouteMatch();
   useEffect(
     () => {
       if (!state || !isContainRoute(state, url)) {
-        history.replace({ state: [{ path, url, title: 'Авторизация' }] });
+        history.replace({ state: [...(state || []), { path, url, title: 'Авторизация' }] });
       }
     },
     [path, url, state, history]
@@ -82,4 +82,4 @@ const SingIn = () => {
   );
 }
 
-export default SingIn;
+export default Login;

@@ -26,7 +26,7 @@ const ResetPassword = () => {
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
     history.push(ERoutePath.LOGIN);
-  }, [history, data]);
+  }, [history]);
 
   ///reset-password
   const handleChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {

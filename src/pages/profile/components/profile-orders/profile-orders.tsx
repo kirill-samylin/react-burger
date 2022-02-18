@@ -18,7 +18,6 @@ const ProfileOrders = () => {
   const history = useHistory();
   const { state } = useLocation<LocationState>();
   const { url, path } = useRouteMatch();
-  console.log({ url, path })
   useEffect(
     () => {
       if (state && !isContainRoute(state, url)) {
