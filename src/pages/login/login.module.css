@@ -1,0 +1,17 @@
+.footer {
+  text-align: center;
+}
+
+.paragraph {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  color: var(--interface-accent);
+  text-decoration: none;
+}
+
+:global .input_size_default {
+  width: 480px;
+}

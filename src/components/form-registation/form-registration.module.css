@@ -1,0 +1,9 @@
+.form {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+  max-width: 480px;
+  width: 100%;
+  margin: 200px auto 80px;
+  text-align: center;
+}
