@@ -1,7 +1,13 @@
 import {useDrag, useDrop} from "react-dnd";
 import {Types} from "constants/types";
+import { MutableRefObject } from "react";
 
-export const useSort = (ref, index, id, onMove) => {
+export const useSort = (
+  ref: MutableRefObject<HTMLLIElement | null>,
+  index: number,
+  id: number,
+  onMove: (drag: number, hover: number) => void
+) => {
   const [{ handlerId }, drop] = useDrop({
     accept: Types.SORT,
     collect(monitor) {
@@ -9,7 +15,7 @@ export const useSort = (ref, index, id, onMove) => {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item, monitor) {
+    hover(item: {index: number}, monitor) {
       if (!ref.current) {
         return;
       }
@@ -23,7 +29,7 @@ export const useSort = (ref, index, id, onMove) => {
       // Get vertical middle
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = (clientOffset?.y || 0) - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
       }

@@ -19,7 +19,7 @@ export const BurgerConstructorIngredient: FC<BurgerConstructorIngredientProps> =
     onMove
   }
 ) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
   const {name, image, price, id} = ingredient;
   const {opacity, handlerId} = useSort(ref, index, id, onMove);
 
