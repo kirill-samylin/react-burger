@@ -1,6 +1,6 @@
-import {url} from "../../../constants/api";
+import {API_URL} from "constants/api";
 import {getJSON} from "../utils/getJSON";
-import {IIngredient} from "../../../types/burger-ingredient";
+import {IIngredient} from "types/burger-ingredient";
 
 export interface GetIngredientsRequest {
   success: boolean;
@@ -8,7 +8,6 @@ export interface GetIngredientsRequest {
 }
 
 export const getIngredientsRequest = (): Promise<GetIngredientsRequest> => {
-  return fetch(`${url}/ingredients`)
-    .then(getJSON)
-    .then(({data}) => data);
+  return fetch(`${API_URL}/ingredients`)
+    .then(getJSON);
 }

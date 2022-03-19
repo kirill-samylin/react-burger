@@ -1,0 +1,17 @@
+.orders {
+  display: grid;
+  grid-auto-rows: max-content;
+  list-style: none;
+  padding: 0 8px 0 0 ;
+  width: 100%;
+  height: 80vh;
+  overflow: auto;
+}
+
+.indent_small {
+  gap: 16px;
+}
+
+.indent_middle {
+  gap: 24px;
+}

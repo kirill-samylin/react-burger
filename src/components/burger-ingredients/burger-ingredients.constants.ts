@@ -1,14 +1,16 @@
+import { EIngredientType } from "types/burger-ingredient";
+
 export const ingredientTypes = [
   {
     name: 'Булки',
-    value: 'bun',
+    value: EIngredientType.BUN,
   },
   {
     name: 'Соусы',
-    value: 'sauce',
+    value: EIngredientType.SAUSE,
   },
   {
     name: 'Начинки',
-    value: 'main',
+    value: EIngredientType.MAIN,
   },
 ];

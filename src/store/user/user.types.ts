@@ -1,15 +1,9 @@
-import {ActionUser} from "./uses.actions";
-import {TActionsType} from "../types";
-
-export interface TUser {
-  email: string;
-  name: string;
-  password?: string;
-}
+import {IInitUser, ILogin, ILogout} from "./uses.actions";
+import { TUser } from "types/user";
 
 export interface IUserState {
   user: null | TUser;
   isInitialized: boolean;
 }
 
-export type ActionsUser = TActionsType<ActionUser>;
+export type TUserActions = IInitUser | ILogin | ILogout;

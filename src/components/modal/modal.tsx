@@ -6,11 +6,12 @@ import {FC, useCallback, useEffect} from "react";
 import {createPortal} from "react-dom";
 
 interface ModalProps {
-  title?: string;
+  title?: string | number;
+  typeTitle?: 'number' | 'string';
   onClose: () => void;
 }
 
-const Modal: FC<ModalProps> = ({children, title = '', onClose}) => {
+const Modal: FC<ModalProps> = ({children, title = '', typeTitle = 'string', onClose}) => {
 
   const handleKeydownClose = useCallback(({key, keyCode}) => {
     if (key === 'Escape' || keyCode === 27) {
@@ -27,7 +28,10 @@ const Modal: FC<ModalProps> = ({children, title = '', onClose}) => {
     <ModalOverlay onClose={onClose}>
       <div className={cn('p-10', styles.modal)}>
         <div className={styles.header}>
-          <p className="text text_type_main-large">{title}</p>
+          <p className={cn("text", {
+            'text_type_main-large': typeTitle === 'string',
+            'text_type_digits-default': typeTitle === 'number',
+          })}>{title}</p>
           <button className={styles.button} onClick={() => onClose()}>
             <CloseIcon type="primary" />
           </button>

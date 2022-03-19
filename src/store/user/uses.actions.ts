@@ -2,23 +2,37 @@ import {LoginBody, loginRequest} from "../../services/api";
 import {Dispatch} from "redux";
 import {deleteCookie, setCookie} from "../../utils/cookie/cookie";
 import {logoutRequest} from "../../services/api/logoutRequest/logoutRequest";
+import { TUser } from "types/user";
 
-export enum ActionUser {
+export enum EActionUser {
   INIT_USER = 'INIT_USER',
   LOGIN = 'LOGIN',
   LOGOUT = 'LOGOUT',
 }
 
+export interface IInitUser {
+  readonly type: typeof EActionUser.INIT_USER;
+}
+
+export interface ILogin {
+  readonly type: typeof EActionUser.LOGIN;
+  readonly payload: TUser;
+}
+
+export interface ILogout {
+  readonly type: typeof EActionUser.LOGOUT;
+}
+
 export const userActions = {
-  initUser: () => ({
-    type: ActionUser.INIT_USER,
+  initUser: (): IInitUser => ({
+    type: EActionUser.INIT_USER,
   }),
-  login: (payload: {user: {email: string, name: string}}) => ({
-    type: ActionUser.LOGIN,
+  login: (payload: TUser): ILogin => ({
+    type: EActionUser.LOGIN,
     payload,
   }),
   logout: () => ({
-    type: ActionUser.LOGOUT,
+    type: EActionUser.LOGOUT,
   }),
 }
 
@@ -31,7 +45,7 @@ export const loginUser = (data: LoginBody) => {
         }
         setCookie('accessToken', accessToken, {expires: 600});
         localStorage.setItem('refreshToken', refreshToken);
-        dispatch(userActions.login({user}));
+        dispatch(userActions.login(user));
       })
       .catch(() => dispatch(userActions.logout()));
   }

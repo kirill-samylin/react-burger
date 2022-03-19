@@ -1,5 +1,5 @@
-import {AppState} from "../types";
-import {TUser} from "./user.types";
+import { AppState } from "../types";
+import { TUser } from "types/user";
 
-export const isAppInitializedSelector = (state: AppState) => state.user.isInitialized;
 export const userSelector = (state: AppState): TUser | null => state.user.user;
+export const isInitSelector = (state: AppState): boolean => state.user.isInitialized;

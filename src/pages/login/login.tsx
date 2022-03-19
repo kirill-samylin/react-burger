@@ -1,4 +1,4 @@
-import {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect} from 'react';
 import {Link, useHistory, useLocation, useRouteMatch} from 'react-router-dom';
 import cn from 'classnames';
 
@@ -10,31 +10,22 @@ import {useDispatch} from "react-redux";
 import {loginUser} from "store/user/uses.actions";
 import Layout from "layout/layout/layout";
 import {isContainRoute} from "services/breadcrumbs";
-import {LocationState} from "types/types";
+import {LocationState} from "types/location";
 import {ERoutePath} from "constants/routes";
+import { useForm } from 'hooks/useForm';
+import { TLoginValues } from 'types/user';
 
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { state } = useLocation<LocationState>();
   const { url, path } = useRouteMatch();
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
-  const handleChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
-
-    const {name, value} = target;
-    setData({
-      ...data,
-      [name]: value,
-    })
-  }, [data]);
+  const {values, handleChange} = useForm<TLoginValues>();
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    dispatch(loginUser(data))
-  }, [data, dispatch]);
+    dispatch(loginUser(values))
+  }, [values, dispatch]);
 
   useEffect(
     () => {
@@ -55,10 +46,10 @@ const Login = () => {
           type="email"
           placeholder="E-mail"
           name="email"
-          value={data.email}
+          value={values.email || ''}
           onChange={handleChange}
         />
-        <PasswordInput name="password" value={data.password} onChange={handleChange} />
+        <PasswordInput name="password" value={values.password || ''} onChange={handleChange} />
         <div>
           <Button type="primary" size="medium" htmlType="submit">Войти</Button>
         </div>

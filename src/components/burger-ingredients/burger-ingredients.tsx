@@ -10,22 +10,21 @@ import {useScrollTabs} from "hooks/useScrollTabs";
 import {BurgerIngredient} from "./components/burger-ingredient";
 import {ingredientStateSelector} from "../../store/ingredient/ingredient.selectors";
 import {useHistory} from "react-router-dom";
+import { ingredientOrderListSelector } from "store/order/order.selectors";
 
-const BurgerIngredients = () => {
+export const BurgerIngredients = () => {
   const history = useHistory();
-  const {currentTabIngredients: currentTab, ingredients, burgerIngredient} = useSelector(ingredientStateSelector);
+  const {currentTabIngredients: currentTab, ingredients} = useSelector(ingredientStateSelector);
+  const burgerIngredient = useSelector(ingredientOrderListSelector);
   const dispatch = useDispatch();
   const handleSwitchTab = useCallback((currentTabIngredients) =>
-    dispatch(ingredientActions.tabSwitchIngredients({
-      currentTabIngredients,
-    })
+    dispatch(ingredientActions.tabSwitchIngredients(currentTabIngredients)
   ), [dispatch]);
 
   const [viewRef, onChangeTab] = useScrollTabs(handleSwitchTab);
 
   return (
     <section>
-      <h2 className="text text_type_main-large mt-10 mb-5">Собери бургер</h2>
       <nav className={styles.tabs}>
         {ingredientTypes.map(({name, value}) => (
           <Tab key={value} value={value} active={currentTab === value} onClick={() => onChangeTab(value)}>
@@ -58,5 +57,3 @@ const BurgerIngredients = () => {
     </section>
   );
 };
-
-export default BurgerIngredients;

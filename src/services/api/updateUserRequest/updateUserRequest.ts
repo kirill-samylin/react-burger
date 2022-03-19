@@ -1,4 +1,4 @@
-import {url} from "../../../constants/api";
+import {API_URL} from "constants/api";
 import {getJSON} from "services/api/utils/getJSON";
 
 export interface UpdateUserResponse {
@@ -16,7 +16,7 @@ export interface updateUserBody {
 }
 
 export const updateUserRequest = (data: updateUserBody, accessToken: string): Promise<UpdateUserResponse> => {
-  return fetch(`${url}/auth/user`, {
+  return fetch(`${API_URL}/auth/user`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

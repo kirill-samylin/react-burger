@@ -1,0 +1,36 @@
+.details {
+  width: 640px;
+  margin: 0 auto;
+}
+
+.list {
+  display: grid;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  max-height: 318px;
+  overflow: auto;
+}
+
+.item {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 64px auto auto;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.number {
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

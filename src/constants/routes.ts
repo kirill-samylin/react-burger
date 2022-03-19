@@ -6,7 +6,10 @@ export enum ERoutePath {
   RESET_PASSWORD = '/reset-password',
   PROFILE = '/profile',
   PROFILE_ORDERS = '/profile/orders',
+  PROFILE_ORDERS_ID = '/profile/orders/:id',
   INGREDIENT_ID = '/ingredient/:id',
   ORDERS = '/orders',
   NOT_FOUNT = '/not-fount',
+  FEED = '/feed',
+  FEED_ID = '/feed/:id',
 }

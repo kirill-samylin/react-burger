@@ -1,7 +1,9 @@
 .main {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.middle {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 40px;
-  max-width: 1240px;
-  margin: 0 auto;
 }

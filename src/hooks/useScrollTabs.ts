@@ -1,4 +1,5 @@
 import {useCallback, useEffect, useRef, MutableRefObject} from "react";
+import { useDebounce } from "./useDebounce";
 
 type THandleChangeTab = (value: string) => void;
 
@@ -47,6 +48,8 @@ export const useScrollTabs: TUseScrollTabs = (handleChangeTab, defaultTabName = 
     handleSetTaPosition(scrollPosition)
   }, [handleSetTaPosition]);
 
+  const onScroll = useDebounce(handleScroll, 300);
+
   const onChangeTab = useCallback((value) => {
     if (!viewRef.current) return;
     const items = getElements();
@@ -58,15 +61,15 @@ export const useScrollTabs: TUseScrollTabs = (handleChangeTab, defaultTabName = 
   useEffect(() => {
     let observerRefValue = viewRef?.current;
     if (observerRefValue) {
-      observerRefValue.addEventListener('scroll', handleScroll);
+      observerRefValue.addEventListener('scroll', onScroll);
     }
 
     return () => {
       if (observerRefValue) {
-        observerRefValue.removeEventListener('scroll', handleScroll);
+        observerRefValue.removeEventListener('scroll', onScroll);
       }
     }
-  }, [viewRef, handleScroll]);
+  }, [viewRef, onScroll]);
 
   return [viewRef, onChangeTab];
 }

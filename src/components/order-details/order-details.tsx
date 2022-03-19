@@ -2,7 +2,7 @@ import styles from './order-details.module.css';
 import doneImg from 'images/done.svg';
 import {useSelector} from "react-redux";
 import {FC} from "react";
-import {orderDetailsSelector} from "store/ingredient/ingredient.selectors";
+import { orderDetailsSelector } from 'store/order/order.selectors';
 
 const OrderDetails: FC = () => {
   const {number} = useSelector(orderDetailsSelector) || {};

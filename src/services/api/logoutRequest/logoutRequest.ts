@@ -1,4 +1,4 @@
-import {url} from "../../../constants/api";
+import {API_URL} from "constants/api";
 import {getJSON} from "../utils/getJSON";
 
 export interface LogoutBody {
@@ -11,7 +11,7 @@ export interface LogoutResponse {
 }
 
 export const logoutRequest = (data: LogoutBody): Promise<LogoutResponse> => {
-  return fetch(`${url}/auth/logout`, {
+  return fetch(`${API_URL}/auth/logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

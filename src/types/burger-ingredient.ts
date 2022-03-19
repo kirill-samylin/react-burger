@@ -12,6 +12,18 @@ export interface IIngredient {
   type: string;
 }
 
+export type TMove = {dragIndex: number, hoverIndex: number};
+
+export enum EIngredientType {
+  BUN = 'bun',
+  SAUSE = 'sauce',
+  MAIN = 'main',
+};
+
 export interface IBurgerIngredient extends IIngredient {
   id: number;
+}
+
+export type TIngredientsItems = {
+  [key: string]: IIngredient;
 }
