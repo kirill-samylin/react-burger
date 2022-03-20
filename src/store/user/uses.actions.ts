@@ -1,8 +1,8 @@
 import {LoginBody, loginRequest} from "../../services/api";
-import {Dispatch} from "redux";
 import {deleteCookie, setCookie} from "../../utils/cookie/cookie";
 import {logoutRequest} from "../../services/api/logoutRequest/logoutRequest";
 import { TUser } from "types/user";
+import { AppDispatch, AppThunk } from "store/types";
 
 export enum EActionUser {
   INIT_USER = 'INIT_USER',
@@ -31,13 +31,13 @@ export const userActions = {
     type: EActionUser.LOGIN,
     payload,
   }),
-  logout: () => ({
+  logout: (): ILogout => ({
     type: EActionUser.LOGOUT,
   }),
 }
 
-export const loginUser = (data: LoginBody) => {
-  return function(dispatch: Dispatch) {
+export const loginUser: AppThunk = (data: LoginBody) => {
+  return function(dispatch: AppDispatch) {
     loginRequest(data)
       .then(({user, accessToken, refreshToken, success}) => {
         if (!success) {
@@ -51,8 +51,8 @@ export const loginUser = (data: LoginBody) => {
   }
 }
 
-export const logout = () => {
-  return function(dispatch: Dispatch): void {
+export const logout: AppThunk = () => {
+  return function(dispatch: AppDispatch): void {
     const refreshToken = localStorage.getItem('refreshToken') || '';
 
     logoutRequest({token: refreshToken})

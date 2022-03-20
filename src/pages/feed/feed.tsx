@@ -20,6 +20,9 @@ export const Feed: FC = () => {
   const order = useCurrentOrder();
   useEffect(() => {
     dispatch(webSocketActions.wsConnectionStart(`${WS_URL}/all`));
+    return () => {
+      dispatch(webSocketActions.wsConnectionClosed());
+    }
   }, [dispatch]);
   return (
     <Layout>

@@ -6,7 +6,6 @@ import {Input, PasswordInput, Button} from "@ya.praktikum/react-developer-burger
 
 import styles from './login.module.css';
 import FormRegistration from "components/form-registation/form-registration";
-import {useDispatch} from "react-redux";
 import {loginUser} from "store/user/uses.actions";
 import Layout from "layout/layout/layout";
 import {isContainRoute} from "services/breadcrumbs";
@@ -14,6 +13,7 @@ import {LocationState} from "types/location";
 import {ERoutePath} from "constants/routes";
 import { useForm } from 'hooks/useForm';
 import { TLoginValues } from 'types/user';
+import { useDispatch } from 'store/hooks';
 
 const Login = () => {
   const dispatch = useDispatch();

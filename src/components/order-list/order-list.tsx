@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom';
 
 import { TOrder } from 'types/order';
 import styles from './order-list.module.css';
-import { useSelector } from 'react-redux';
 import {ingredientDetailsList } from 'store/ingredient/ingredient.selectors';
 import { OrderItem } from './components';
+import { useSelector } from 'store/hooks';
 
 interface OrderListProps {
   orders: TOrder[];

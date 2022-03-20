@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux";
+
 import {FC, useCallback, useEffect, useState} from "react";
 import cn from "classnames";
 import styles from "../../profile.module.css";
@@ -11,6 +11,7 @@ import {LocationState} from "types/location";
 import {isContainRoute} from "services/breadcrumbs";
 import { TRegistrationValues } from "types/user";
 import { useForm } from "hooks/useForm";
+import { useSelector } from "store/hooks";
 
 const ProfileEdit: FC = () => {
   const {name = '', email = ''} = useSelector(userSelector) || {};

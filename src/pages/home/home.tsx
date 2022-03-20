@@ -1,5 +1,4 @@
 import {FC, useCallback} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import {Route, useHistory, useLocation} from "react-router-dom";
 import {LocationState} from "types/location";
 import Layout from "layout/layout/layout";
@@ -11,6 +10,7 @@ import styles from './home.module.css';
 import { Constructor } from "components/constructor";
 import { isShowOrderDetailsSelector } from "store/order/order.selectors";
 import { orderActions } from "store/order/order.actions";
+import { useDispatch, useSelector } from "store/hooks";
 
 const Home: FC = () => {
   const dispatch = useDispatch();

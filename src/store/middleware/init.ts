@@ -1,11 +1,11 @@
-import {Dispatch} from "redux";
 import {getIngredientsRequest, getUserRequest, updateTokenRequest} from "services/api";
 import { ingredientActions } from "store/ingredient/ingredient.actions";
+import { AppDispatch, AppThunk } from "store/types";
 import { userActions } from "store/user/uses.actions";
 import {getCookie, setCookie} from "utils/cookie/cookie";
 
-export const initMiddleware = () => {
-  return async function(dispatch: Dispatch) {
+export const initMiddleware: AppThunk = () => {
+  return async function(dispatch: AppDispatch) {
     dispatch(userActions.initUser());
     dispatch(ingredientActions.getIngredientsRequest());
     let accessToken: string = getCookie('accessToken') || '';

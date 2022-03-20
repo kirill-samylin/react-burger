@@ -2,7 +2,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  padding: 1rem;
+  padding: 2px;
   background: linear-gradient(to right, #801AB2, #4C4CFF);
   position: relative;
 }

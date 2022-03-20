@@ -1,8 +1,8 @@
-import thunk, {ThunkDispatch} from 'redux-thunk';
+import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {ingredientReducer} from "./ingredient/ingredient.reducer";
 import {userReducer} from "./user/user.reducer";
-import type {TAppActions, AppState} from "./types";
+import type {AppThunk} from "./types";
 import { initMiddleware } from './middleware/init';
 import { orderReducer } from './order/order.reducer';
 import { socketMiddleware } from './websocket/websocket.middleware';
@@ -38,4 +38,4 @@ const enhancer = composeEnhancers(applyMiddleware(thunk, webSocketMiddleware));
 
 export const store = createStore(rootReducer, enhancer);
 
-(store.dispatch as ThunkDispatch<AppState, unknown, TAppActions>)(initMiddleware());
+(store.dispatch as AppThunk)(initMiddleware());

@@ -3,8 +3,8 @@ import cn from "classnames";
 import styles from "./profile-nav.module.css";
 import {useCallback} from "react";
 import {logout} from "store/user/uses.actions";
-import {useDispatch} from "react-redux";
 import {ERoutePath} from "constants/routes";
+import { useDispatch } from "store/hooks";
 
 const ProfileNav = () => {
   const dispatch = useDispatch();

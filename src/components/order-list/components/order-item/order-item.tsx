@@ -21,8 +21,7 @@ export const OrderItem: FC<OrderItemProps> = memo(({order, list, size, pachName}
   const {_id, createdAt, ingredients, number} = order;
   const sum = useMemo<number>(() =>
     ingredients.reduce((cost, id) => cost+=list[id]?.price || 0, 0), [ingredients, list]);
-  const ingredientsList = useMemo(() => ingredients.filter((item, i) => i < 5), [ingredients]);
-
+  const ingredientsList = useMemo(() => ingredients.filter((id, i) => i < 5 && id), [ingredients]);
   const lastIngredient = useMemo(() => {
     if (ingredients.length > 5) {
       const count = ingredients.length - 5;
@@ -32,7 +31,6 @@ export const OrderItem: FC<OrderItemProps> = memo(({order, list, size, pachName}
     }
     return null;
   }, [ingredients, list]);
-
 
   return (
     <Link className={styles.link} key={_id}

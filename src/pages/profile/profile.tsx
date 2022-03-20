@@ -28,6 +28,9 @@ const Profile = () => {
     dispatch(
       webSocketActions.wsConnectionStart(`${WS_URL}?token=${accessToken}`)
     );
+    return () => {
+      dispatch(webSocketActions.wsConnectionClosed());
+    }
   }, [dispatch]);
   return (
     <Layout>

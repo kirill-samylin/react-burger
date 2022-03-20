@@ -1,7 +1,6 @@
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css';
 import cn from "classnames";
-import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {FC, useCallback} from "react";
 import {BurgerConstructorIngredient} from "./components";
@@ -13,6 +12,7 @@ import { createOrder } from "store/order/order.middleware";
 import {ingredientOrderListSelector, isOrderRequestSelector } from "store/order/order.selectors";
 import { IIngredient } from "types/burger-ingredient";
 import { orderActions } from "store/order/order.actions";
+import { useDispatch, useSelector } from "store/hooks";
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
