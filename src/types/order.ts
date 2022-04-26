@@ -1,13 +1,9 @@
-export enum EOrderStatus {
-  CREATED = 'created',
-  PENDING = 'pending',
-  DONE = 'done',
-}
+export type TOrderStatus = 'created' | 'pending' | 'done'
 
 export type TOrder = {
   ingredients: string[];
   _id: string;
-  status: EOrderStatus;
+  status: TOrderStatus;
   number: number;
   createdAt: string;
   updatedAt: string;

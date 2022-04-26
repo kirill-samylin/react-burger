@@ -4,7 +4,7 @@ import cn from 'classnames';
 import {NavLink, useRouteMatch} from "react-router-dom";
 import {ERoutePath} from "constants/routes";
 
-const Header = () => {
+export const Header = () => {
   const {path} = useRouteMatch();
 
   return (
@@ -48,5 +48,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

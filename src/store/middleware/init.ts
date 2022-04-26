@@ -1,4 +1,4 @@
-import {getIngredientsRequest, getUserRequest, updateTokenRequest} from "services/api";
+import {api} from "services/api";
 import { ingredientActions } from "store/ingredient/ingredient.actions";
 import { AppDispatch, AppThunk } from "store/types";
 import { userActions } from "store/user/uses.actions";
@@ -10,7 +10,7 @@ export const initMiddleware: AppThunk = () => {
     dispatch(ingredientActions.getIngredientsRequest());
     let accessToken: string = getCookie('accessToken') || '';
     const refreshToken = localStorage.getItem('refreshToken') || '';
-    await getIngredientsRequest()
+    await api.getIngredients()
       .then(({success, data}) => dispatch(ingredientActions.getIngredientsSuccess(success ? data : [])))
       .catch(() => dispatch(ingredientActions.getIngredientsFailed()));
     try {
@@ -18,12 +18,12 @@ export const initMiddleware: AppThunk = () => {
         return dispatch(userActions.logout());
       }
       if (!accessToken) {
-        const {success, accessToken: token} = await updateTokenRequest({token: refreshToken});
+        const {success, accessToken: token} = await api.updateToken({token: refreshToken});
         if (!success) throw new Error('NOT');
         accessToken = token;
         setCookie('accessToken', token, {expires: 600});
       }
-      const {success: resp, user} = await getUserRequest(accessToken);
+      const {success: resp, user} = await api.getUser(accessToken);
       if (!resp) throw new Error('NOT');
       dispatch(userActions.login(user));
     } catch {

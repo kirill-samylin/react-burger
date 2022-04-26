@@ -7,7 +7,7 @@ import {Input, PasswordInput, Button} from "@ya.praktikum/react-developer-burger
 import Layout from "layout/layout/layout";
 import styles from './registration.module.css';
 import FormRegistration from "components/form-registation/form-registration";
-import {registerRequest} from "services/api";
+import {api} from "services/api";
 import {LocationState} from "types/location";
 import {isContainRoute} from "services/breadcrumbs";
 import {ERoutePath} from "constants/routes";
@@ -30,7 +30,7 @@ const Registration = () => {
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    registerRequest(values)
+    api.register(values)
       .then(() => history.push(ERoutePath.LOGIN))
       .catch((err) => console.log(err));
   }, [values, history]);

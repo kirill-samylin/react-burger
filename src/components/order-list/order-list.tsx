@@ -25,7 +25,7 @@ export const OrderList: FC<OrderListProps> = memo(({className, orders}) => {
       [styles.indent_middle]: size === 'middle',
       [styles.indent_small]: size === 'small',
     })} ref={refListElement}>
-      {orders.map((order) => (
+      {orders && orders.map((order) => (
         <OrderItem
           key={order._id}
           order={order}

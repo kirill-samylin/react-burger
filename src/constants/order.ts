@@ -1,7 +1,7 @@
-import { EOrderStatus } from "types/order";
+import { TOrderStatus } from "types/order";
 
-export const orderStatus: Record<EOrderStatus, string> = {
-  [EOrderStatus.CREATED]: 'Создан',
-  [EOrderStatus.DONE]: 'Выполнен',
-  [EOrderStatus.PENDING]: 'Готовится',
+export const orderStatus: Record<TOrderStatus, string> = {
+  created: 'Создан',
+  done: 'Выполнен',
+  pending: 'Готовится',
 }

@@ -1,5 +1,5 @@
 import { FC, memo, useMemo } from "react";
-import {EOrderStatus, TOrder } from "types/order";
+import {TOrder } from "types/order";
 import { filterOrdersByStatus } from "utils/order";
 import { FeedInfoOrders, FeedInfoScoreboard } from "./components";
 import styles from './feed-info.module.css';
@@ -11,8 +11,8 @@ interface FeedInfoProps {
 }
 
 export const FeedInfo: FC<FeedInfoProps> = memo(({orders, total, totalToday}) => {
-  const ordersDone = useMemo(() => filterOrdersByStatus(orders, EOrderStatus.DONE), [orders]);
-  const ordersPending = useMemo(() => filterOrdersByStatus(orders, EOrderStatus.PENDING), [orders]);
+  const ordersDone = useMemo(() => filterOrdersByStatus(orders, 'done'), [orders]);
+  const ordersPending = useMemo(() => filterOrdersByStatus(orders, 'pending'), [orders]);
   return (
     <div className={styles.block}>
       <div className={styles.info}>

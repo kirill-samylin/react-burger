@@ -52,7 +52,7 @@ export const BurgerConstructor: FC = () => {
   }, [dispatch])
 
   return (
-    <section className="pr-4 pr-4 mt-25" ref={dropTarget}>
+    <section data-test-id="burger-constructor" className="pr-4 pr-4 mt-25" ref={dropTarget}>
       {bunItem && (
         <div className="ml-8">
           <ConstructorElement

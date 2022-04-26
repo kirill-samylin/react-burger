@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ef9907de-693b-40f1-9d73-8e9d34506df7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/integration/burger-constructor.spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/integration/routing.spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jest-setup.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layout/header/__tests__/header.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layout/header/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/logout/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/order/__tests__/order.data.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/order/__tests__/order.reducer.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/user/__tests__/user.reducer.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/websocket/__tests__/websocket.reducer.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/burger-constructor/burger-constructor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/feed-info/feed-info.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed-info/feed-info.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/order-list/order-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order-list/order-list.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/order.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/header/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/layout/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/layout/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/forgot-password/forgot-password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/forgot-password/forgot-password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/registration/registration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/registration/registration.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/createOrderRequest/createOrderRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/createOrder/createOrder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/createOrderRequest/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/createOrder/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/forgotPasswordRequest/forgotPasswordRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/forgotPassword/forgotPassword.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/forgotPasswordRequest/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/forgotPassword/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/getIngredientsRequest/getIngredientsRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/getIngredients/getIngredients.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/getIngredientsRequest/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/getIngredients/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/getUserRequest/getUserRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/getUser/getUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/getUserRequest/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/getUser/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/loginRequest/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/login/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/loginRequest/loginRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/login/login.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/logoutRequest/logoutRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/logout/logout.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/registerRequest/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/register/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/registerRequest/registerRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/register/register.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/updateTokenRequest/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/updateToken/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/updateTokenRequest/updateTokenRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/updateToken/updateToken.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api/updateUserRequest/updateUserRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/updateUser/updateUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/ingredient/ingredient.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/ingredient/ingredient.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/middleware/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/middleware/init.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/order/order.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/order/order.middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/user/uses.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/uses.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/order.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/order.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26mxjRRJu5iJJ1OzgwzBSROGyxD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="compactDirectories" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cypress/integration" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cypress/integration" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cypress/integration" />
+      <recent name="$PROJECT_DIR$/cypress" />
+      <recent name="$PROJECT_DIR$/cypress/integration/ingredient/app/app" />
+      <recent name="$PROJECT_DIR$/cypress/integration/ingredient/app" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Jest.Websocket reducer test">
+    <configuration name="Websocket reducer test" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/store/websocket/__tests__/websocket.reducer.test.ts" />
+      <test-names>
+        <test-name value="Websocket reducer test" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Websocket reducer test.should closed websocket" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/store/websocket/__tests__/websocket.reducer.test.ts" />
+      <test-names>
+        <test-name value="Websocket reducer test" />
+        <test-name value="should closed websocket" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Websocket reducer test.should set message" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/store/websocket/__tests__/websocket.reducer.test.ts" />
+      <test-names>
+        <test-name value="Websocket reducer test" />
+        <test-name value="should set message" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name=".should logout" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/store/user/__tests__/user.reducer.test.ts" />
+      <test-names>
+        <test-name value="" />
+        <test-name value="should logout" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="header.test.tsx" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
+      <config-file value="$PROJECT_DIR$/jest.config.js" />
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/src/layout/header/__tests__/header.test.tsx" />
+      <method v="2" />
+    </configuration>
+    <configuration name="order.reducer.test.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/src/store/order/__tests__/order.reducer.test.ts" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.Websocket reducer test" />
+        <item itemvalue="Jest.Websocket reducer test.should closed websocket" />
+        <item itemvalue="Jest.Websocket reducer test.should set message" />
+        <item itemvalue="Jest.order.reducer.test.ts" />
+        <item itemvalue="Jest..should logout" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ef9907de-693b-40f1-9d73-8e9d34506df7" name="Changes" comment="" />
+      <created>1648042698242</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648042698242</updated>
+      <workItem from="1648042703982" duration="919000" />
+      <workItem from="1648329264107" duration="2470000" />
+      <workItem from="1648638325196" duration="7314000" />
+      <workItem from="1649421065253" duration="2123000" />
+      <workItem from="1649789266478" duration="2344000" />
+      <workItem from="1649921473862" duration="176000" />
+      <workItem from="1650052182798" duration="8759000" />
+      <workItem from="1650313458752" duration="596000" />
+      <workItem from="1650825944866" duration="7133000" />
+      <workItem from="1650962200698" duration="2854000" />
+      <workItem from="1651002595221" duration="5904000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
