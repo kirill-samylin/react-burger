@@ -5,7 +5,7 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import cn from "classnames";
 import styles from "../registration/registration.module.css";
 import {Link, useHistory, useLocation, useRouteMatch} from "react-router-dom";
-import {forgotPasswordRequest} from "services/api";
+import {api} from "services/api";
 import {LocationState} from "types/location";
 import {isContainRoute} from "services/breadcrumbs";
 import {ERoutePath} from "constants/routes";
@@ -27,7 +27,7 @@ const ForgotPassword: FC = () => {
   );
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    forgotPasswordRequest(values)
+    api.forgotPassword(values)
       .then(() => {
         history.push({
           pathname: ERoutePath.RESET_PASSWORD,
