@@ -1,4 +1,4 @@
-import {url} from "constants/api";
+import {API_URL} from "constants/api";
 import {getJSON} from "services/api/utils/getJSON";
 
 export interface LoginResponse {
@@ -17,7 +17,7 @@ export interface LoginBody {
 }
 
 export const loginRequest = (data: LoginBody): Promise<LoginResponse> => {
-  return fetch(`${url}/auth/login`, {
+  return fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

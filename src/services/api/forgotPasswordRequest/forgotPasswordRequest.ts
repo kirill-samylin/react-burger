@@ -1,8 +1,8 @@
-import {url} from "constants/api";
+import {API_URL} from "constants/api";
 import {getJSON} from "services/api/utils/getJSON";
 
 export const forgotPasswordRequest  = (data: object) => {
-  return fetch(`${url}/password-reset`, {
+  return fetch(`${API_URL}/password-reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

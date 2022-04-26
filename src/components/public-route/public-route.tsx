@@ -3,7 +3,7 @@ import {Redirect, Route, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {userSelector} from "store/user/user.selectors";
 import {PublicRouteTypes} from "./public-route.types";
-import { LocationState } from "types/types";
+import { LocationState } from "types/location";
 
 export const PublicRoute: FC<PublicRouteTypes> = ({redirectTo, ...props}) => {
   const user = useSelector(userSelector);

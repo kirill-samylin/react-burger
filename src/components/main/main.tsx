@@ -1,19 +1,17 @@
+import { FC } from 'react';
 import styles from './main.module.css';
-import BurgerIngredients from "components/burger-ingredients/burger-ingredients";
 
-import BurgerConstructor from "components/burger-constructor/burger-constructor";
-import {HTML5Backend} from "react-dnd-html5-backend";
-import {DndProvider} from "react-dnd";
+interface MainProps {
+  title: string;
+}
 
-const Main = () => {
+export const Main: FC<MainProps> = ({title, children}) => {
   return (
     <main className={styles.main}>
-      <DndProvider backend={HTML5Backend}>
-        <BurgerIngredients />
-        <BurgerConstructor />
-      </DndProvider>
+      <h2 className="text text_type_main-large mt-10 mb-5">{title}</h2>
+      <section className={styles.middle}>
+        {children}
+      </section>
     </main>
   );
 };
-
-export default Main;

@@ -1,0 +1,10 @@
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

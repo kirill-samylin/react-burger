@@ -1,0 +1,47 @@
+.order {
+  max-width: 856px;
+  background: var(--interface-modal-bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+  cursor: pointer;
+}
+.link {
+  text-decoration: none;
+  color: white;
+}
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.price {
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.indent {
+  margin-left: -15px;
+}
+
+.ingredients {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 0;
+  list-style: none;
+  max-width: 280px;
+  flex-wrap: wrap;
+  margin: 0 0 0 15px;
+  row-gap: 5px;
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}

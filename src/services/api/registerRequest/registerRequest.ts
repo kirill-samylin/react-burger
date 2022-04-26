@@ -1,4 +1,4 @@
-import {url} from "constants/api";
+import {API_URL} from "constants/api";
 import {getJSON} from "services/api/utils/getJSON";
 
 export interface RegisterBody {
@@ -18,7 +18,7 @@ export interface RegisterResponse {
 }
 
 export const registerRequest = (data: RegisterBody): Promise<RegisterResponse> => {
-  return fetch(`${url}/auth/register`, {
+  return fetch(`${API_URL}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

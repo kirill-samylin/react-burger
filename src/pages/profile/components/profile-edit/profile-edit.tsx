@@ -1,18 +1,21 @@
-import {useSelector} from "react-redux";
+
 import {FC, useCallback, useEffect, useState} from "react";
 import cn from "classnames";
 import styles from "../../profile.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {userSelector} from "store/user/user.selectors";
-import {TUser} from "store/user/user.types";
+
 import {useHistory, useLocation, useRouteMatch} from "react-router-dom";
-import {LocationState} from "../../../../types/types";
-import {isContainRoute} from "../../../../services/breadcrumbs";
+import {LocationState} from "types/location";
+import {isContainRoute} from "services/breadcrumbs";
+import { TRegistrationValues } from "types/user";
+import { useForm } from "hooks/useForm";
+import { useSelector } from "store/hooks";
 
 const ProfileEdit: FC = () => {
   const {name = '', email = ''} = useSelector(userSelector) || {};
-  const [data, setData] = useState<TUser>({name, email, password: 'ffff'});
+  const {values, handleChange, resetForm} = useForm<TRegistrationValues>({name, email, password: 'ffff'});
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const history = useHistory();
@@ -28,31 +31,21 @@ const ProfileEdit: FC = () => {
     [path, url, state, history]
   );
 
-  const handleChange = useCallback(({target}) => {
-    const {name, value} = target;
-    setData({
-      ...data,
-      [name]: value,
-    })
-  }, [data]);
-
-  const handleEdit = useCallback(() => {
-    setData({
-      ...data,
-      password: '',
-    });
-    setIsEdit(true);
-  }, [data]);
-
   const handleCancel = useCallback(() => {
-    setData({name, email, password: 'ffff'});
+    resetForm({name, email, password: 'ffff'});
     setIsEdit(false);
-  }, [email, name]);
+  }, [email, name, resetForm]);
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    console.log(data)
-  }, [data]);
+    console.log(values)
+  }, [values]);
+
+  const handleEdit = useCallback(() => {
+    resetForm({...values, password: ''});
+    setIsEdit(true);
+  }, [values, resetForm]);
+
   return (
     <form className={cn(styles.form, "ml-15")} onSubmit={handleSubmit}>
       <Input
@@ -61,7 +54,7 @@ const ProfileEdit: FC = () => {
         placeholder="Имя"
         disabled={!isEdit}
         icon="EditIcon"
-        value={data.name}
+        value={values.name || ''}
         onChange={handleChange}
         onIconClick={handleEdit}
       />
@@ -71,7 +64,7 @@ const ProfileEdit: FC = () => {
         placeholder="Логин"
         disabled={!isEdit}
         icon="EditIcon"
-        value={data.email}
+        value={values.email || ''}
         onChange={handleChange}
         onIconClick={handleEdit}
       />
@@ -81,7 +74,7 @@ const ProfileEdit: FC = () => {
         placeholder="Пароль"
         disabled={!isEdit}
         icon="EditIcon"
-        value={data.password || ''}
+        value={values.password || ''}
         onChange={handleChange}
         onIconClick={handleEdit}
       />

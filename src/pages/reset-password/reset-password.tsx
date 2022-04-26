@@ -1,18 +1,17 @@
-import {ChangeEvent, useCallback, useState} from "react";
+import {useCallback} from "react";
 import FormRegistration from "components/form-registation/form-registration";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import styles from "../registration/registration.module.css";
 import {Link, useHistory, useLocation} from "react-router-dom";
 import Layout from "layout/layout/layout";
-import {LocationState} from "types/types";
-import {ERoutePath} from "../../constants/routes";
+import {LocationState} from "types/location";
+import {ERoutePath} from "constants/routes";
+import { useForm } from "hooks/useForm";
+import { TResetPasswordValues } from "types/user";
 
 const ResetPassword = () => {
-  const [data, setData] = useState({
-    password: '',
-    code: '',
-  });
+  const {values, handleChange} = useForm<TResetPasswordValues>();
 
   const history = useHistory();
   const { state } = useLocation<LocationState>();
@@ -28,15 +27,6 @@ const ResetPassword = () => {
     history.push(ERoutePath.LOGIN);
   }, [history]);
 
-  ///reset-password
-  const handleChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = target;
-    setData({
-      ...data,
-      [name]: value,
-    })
-  }, [data]);
-
   return (
     <Layout>
       <FormRegistration onSubmit={handleSubmit}>
@@ -45,13 +35,13 @@ const ResetPassword = () => {
           placeholder="Введите новый пароль"
           type="password"
           icon="CurrencyIcon"
-          value={data.password}
+          value={values.password}
           onChange={handleChange}
         />
         <Input
           type="text"
           placeholder="Введите код из письма"
-          value={data.code}
+          value={values.code}
           onChange={handleChange}
         />
         <div>

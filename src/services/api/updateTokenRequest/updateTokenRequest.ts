@@ -1,4 +1,4 @@
-import {url} from "constants/api";
+import {API_URL} from "constants/api";
 import {getJSON} from "services/api/utils/getJSON";
 
 export interface UpdateTokenResponse {
@@ -12,7 +12,7 @@ export interface UpdateTokenBody {
 }
 
 export const updateTokenRequest = (data: UpdateTokenBody): Promise<UpdateTokenResponse> => {
-  return fetch(`${url}/auth/token`, {
+  return fetch(`${API_URL}/auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

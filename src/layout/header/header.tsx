@@ -22,8 +22,13 @@ const Header = () => {
               Конструктор
             </p>
           </NavLink>
-          <NavLink activeClassName={styles.active} className={cn(styles.link, "text_color_inactive")} to={ERoutePath.ORDERS} exact>
-            <ListIcon type={path === ERoutePath.ORDERS ? "primary" : "secondary"} />
+          <NavLink activeClassName={styles.active} className={cn(styles.link, "text_color_inactive")}
+             to={{
+               pathname: ERoutePath.FEED,
+               state: [{path: ERoutePath.FEED, url: ERoutePath.FEED, title: 'Лента заказов'}]
+             }}
+          >
+            <ListIcon type={path.startsWith(ERoutePath.FEED) ? "primary" : "secondary"} />
             <p className="text text_type_main-default pl-2">
               Лента заказов
             </p>

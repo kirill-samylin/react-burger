@@ -1,20 +1,23 @@
-import {TActionsType} from "../types";
-import {ActionIngredient} from "./ingredient.actions";
-import {IBurgerIngredient, IIngredient} from "../../types/burger-ingredient";
+import {
+  EActionIngredient,
+  IGetIngredientsFailed,
+  IGetIngredientsRequest,
+  IGetIngredientsSuccess,
+  ITabSwitchIngredients
+} from "./ingredient.actions";
+
+import {EIngredientType, IBurgerIngredient, IIngredient} from "types/burger-ingredient";
 
 export interface IIngredientState {
   ingredients: IIngredient[];
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;
-  burgerIngredient: IBurgerIngredient[];
-  orderDetailsRequest: boolean;
-  orderDetailsFailed: boolean;
   isShowIngredientDetails: boolean;
-  currentTabIngredients: string;
-  isShowOrderDetails: boolean;
-  orderDetails: {
-    number?: number;
-  };
+  currentTabIngredients: EIngredientType;
 }
 
-export type ActionsIngredient = TActionsType<ActionIngredient>;
+export type TIngredientActions =
+  IGetIngredientsRequest |
+  IGetIngredientsSuccess |
+  IGetIngredientsFailed |
+  ITabSwitchIngredients;

@@ -1,12 +1,12 @@
 import styles from './ingredient-details.module.css';
 import cn from "classnames";
-import {useSelector} from "react-redux";
 import {FC} from "react";
 import {getIngredientSelector} from "store/ingredient/ingredient.selectors";
 import {useParams} from "react-router";
 import {useHistory} from "react-router-dom";
 import {ERoutePath} from "constants/routes";
 import {IngredientDetailsProps} from "./ingredient-details.types";
+import { useSelector } from 'store/hooks';
 
 const IngredientDetails: FC<IngredientDetailsProps> = ({className, isTitle = false}) => {
   const history = useHistory();

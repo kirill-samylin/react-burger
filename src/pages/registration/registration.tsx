@@ -1,4 +1,4 @@
-import {useState, useCallback, useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import {Link, useHistory, useLocation, useRouteMatch} from 'react-router-dom';
 import cn from 'classnames';
 
@@ -8,16 +8,14 @@ import Layout from "layout/layout/layout";
 import styles from './registration.module.css';
 import FormRegistration from "components/form-registation/form-registration";
 import {registerRequest} from "services/api";
-import {LocationState} from "types/types";
+import {LocationState} from "types/location";
 import {isContainRoute} from "services/breadcrumbs";
 import {ERoutePath} from "constants/routes";
+import { useForm } from 'hooks/useForm';
+import { TRegistrationValues } from 'types/user';
 
 const Registration = () => {
-  const [data, setData] = useState({
-    name: '',
-    password: '',
-    email: '',
-  });
+  const {values, handleChange} = useForm<TRegistrationValues>();
   const history = useHistory();
   const { state } = useLocation<LocationState>();
   const { url, path } = useRouteMatch();
@@ -30,20 +28,12 @@ const Registration = () => {
     [path, url, state, history]
   );
 
-  const handleChange = useCallback((e) => {
-    const {name, value} = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  }, [data]);
-
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    registerRequest(data)
+    registerRequest(values)
       .then(() => history.push(ERoutePath.LOGIN))
       .catch((err) => console.log(err));
-  }, [data, history]);
+  }, [values, history]);
 
   return (
     <Layout>
@@ -55,17 +45,17 @@ const Registration = () => {
           name="name"
           type="text"
           placeholder="Имя"
-          value={data.name}
+          value={values.name || ''}
           onChange={handleChange}
         />
         <Input
           name="email"
           type="email"
           placeholder="E-mail"
-          value={data.email}
+          value={values.email || ''}
           onChange={handleChange}
         />
-        <PasswordInput name="password" value={data.password} onChange={handleChange} />
+        <PasswordInput name="password" value={values.password} onChange={handleChange} />
         <div>
           <Button type="primary" size="medium" htmlType="submit">Зарегистрироваться</Button>
         </div>

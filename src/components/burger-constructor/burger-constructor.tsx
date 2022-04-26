@@ -1,24 +1,27 @@
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css';
 import cn from "classnames";
-import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
-import {createOrder, ingredientActions} from "store/ingredient/ingredient.actions";
 import {FC, useCallback} from "react";
 import {BurgerConstructorIngredient} from "./components";
 import {Types} from "constants/types";
-import {ingredientStateSelector} from "store/ingredient/ingredient.selectors";
 import { userSelector } from "store/user/user.selectors";
 import { useHistory } from "react-router-dom";
 import { ERoutePath } from "constants/routes";
+import { createOrder } from "store/order/order.middleware";
+import {ingredientOrderListSelector, isOrderRequestSelector } from "store/order/order.selectors";
+import { IIngredient } from "types/burger-ingredient";
+import { orderActions } from "store/order/order.actions";
+import { useDispatch, useSelector } from "store/hooks";
 
-const BurgerConstructor: FC = () => {
+export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const handleOpenOrderDetailsPopup = useCallback((ids) => {
     dispatch(createOrder(ids));
   }, [dispatch]);
-  const {burgerIngredient: ingredients, orderDetailsRequest} = useSelector(ingredientStateSelector);
+  const ingredients = useSelector(ingredientOrderListSelector);
+  const isRequest = useSelector(isOrderRequestSelector);
   const bunItem = ingredients.length && ingredients[0].type === 'bun' ? ingredients[0] : null;
   const sum = ingredients.reduce((sum, {price, type}) => sum+(price * (type === 'bun' ? 2 : 1)), 0);
   const isAuth = useSelector(userSelector);
@@ -26,9 +29,7 @@ const BurgerConstructor: FC = () => {
   const [, dropTarget] = useDrop({
     accept: Types.INGREDIENT,
     drop(ingredient) {
-      dispatch(ingredientActions.addIngredient({
-        ingredient,
-      }));
+      dispatch(orderActions.addIngredient(ingredient as IIngredient));
     }
   });
   const handleSubmit = useCallback(() => {
@@ -40,15 +41,13 @@ const BurgerConstructor: FC = () => {
   }, [ingredients, handleOpenOrderDetailsPopup, isAuth, history]);
 
   const handleDelete = useCallback((id) => {
-    dispatch(ingredientActions.cleanIngredient({id}));
+    dispatch(orderActions.cleanIngredient(id));
   }, [dispatch]);
 
   const handleMove = useCallback((dragIndex, hoverIndex) => {
-    dispatch(ingredientActions.moveIngredient({
-      move: {
-        dragIndex,
-        hoverIndex,
-      },
+    dispatch(orderActions.moveIngredient({
+      dragIndex,
+      hoverIndex,
     }));
   }, [dispatch])
 
@@ -102,12 +101,10 @@ const BurgerConstructor: FC = () => {
           <p className="text text_type_digits-medium mr-2">{sum}</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large" onClick={handleSubmit} disabled={orderDetailsRequest || !ingredients.find(({type}) => type === 'bun')}>
-          {orderDetailsRequest ? 'Загрузка...' : 'Оформить заказ'}
+        <Button type="primary" size="large" onClick={handleSubmit} disabled={isRequest || !ingredients.find(({type}) => type === 'bun')}>
+          {isRequest ? 'Загрузка...' : 'Оформить заказ'}
         </Button>
       </div>
     </section>
   );
 }
-
-export default BurgerConstructor;

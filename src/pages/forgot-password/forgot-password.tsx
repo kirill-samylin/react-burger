@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, useCallback, useEffect, useState} from "react";
+import {FC, useCallback, useEffect} from "react";
 import Layout from "layout/layout/layout";
 import FormRegistration from "components/form-registation/form-registration";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -6,14 +6,14 @@ import cn from "classnames";
 import styles from "../registration/registration.module.css";
 import {Link, useHistory, useLocation, useRouteMatch} from "react-router-dom";
 import {forgotPasswordRequest} from "services/api";
-import {LocationState} from "../../types/types";
-import {isContainRoute} from "../../services/breadcrumbs";
-import {ERoutePath} from "../../constants/routes";
+import {LocationState} from "types/location";
+import {isContainRoute} from "services/breadcrumbs";
+import {ERoutePath} from "constants/routes";
+import { useForm } from "hooks/useForm";
+import { TEmail } from "types/user";
 
 const ForgotPassword: FC = () => {
-  const [data, setData] = useState({
-    email: '',
-  });
+  const {values, handleChange} = useForm<TEmail>();
   const history = useHistory();
   const { state } = useLocation<LocationState>();
   const { url, path } = useRouteMatch();
@@ -27,7 +27,7 @@ const ForgotPassword: FC = () => {
   );
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    forgotPasswordRequest(data)
+    forgotPasswordRequest(values)
       .then(() => {
         history.push({
           pathname: ERoutePath.RESET_PASSWORD,
@@ -35,15 +35,7 @@ const ForgotPassword: FC = () => {
         });
       })
       .catch((err) => console.log(err));
-  }, [history, data, state]);
-
-  const handleChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  }, [data]);
+  }, [history, values, state]);
 
   return (
     <Layout>
@@ -56,7 +48,7 @@ const ForgotPassword: FC = () => {
           name="email"
           placeholder="E-mail"
           onChange={handleChange}
-          value={data.email}
+          value={values.email || ''}
         />
         <div>
           <Button type="primary" size="medium" htmlType="submit">Восстановить</Button>

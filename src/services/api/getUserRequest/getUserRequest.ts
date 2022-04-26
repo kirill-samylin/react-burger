@@ -1,4 +1,4 @@
-import {url} from "../../../constants/api";
+import {API_URL} from "constants/api";
 import {getJSON} from "../utils/getJSON";
 
 export interface GetUserResponse {
@@ -10,7 +10,7 @@ export interface GetUserResponse {
 }
 
 export const getUserRequest = (accessToken: string): Promise<GetUserResponse> => {
-  return fetch(`${url}/auth/user`, {
+  return fetch(`${API_URL}/auth/user`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
